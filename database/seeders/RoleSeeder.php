@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -22,10 +23,12 @@ class RoleSeeder extends Seeder
                 'created_at' => \Carbon\Carbon::now(),
             ]
         ];
+        Role::truncate();
 		$role = Role::insert(
 			$data_role
 		);
-
+    $user = User::find('1');
+    $user->assignRole('Administrator');
         $role_first = Role::first();
 
         $permissions = [
@@ -70,7 +73,7 @@ class RoleSeeder extends Seeder
                 'action'     => ['view', 'add', 'edit', 'delete'],
             ]
         ];
-
+        Permission::truncate();
         foreach ($permissions as $row) {
             foreach ($row['action'] as $key => $val) {
                 $temp = [
@@ -80,6 +83,7 @@ class RoleSeeder extends Seeder
     			// create permission and assign to role
     			$perms = Permission::create($temp);
     			$role_first->givePermissionTo($perms);
+
     		}
     	}
     }

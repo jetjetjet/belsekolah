@@ -12,5 +12,6 @@
 
 @section('js-prime')
   <script src="{{ asset('assets/libs/select2/js/select2.min.js') }}"></script>
+  <script src="{{ asset('assets/libs/admin-resources/bootstrap-filestyle/bootstrap-filestyle.min.js') }}"></script>
   @yield('js-form')
 @endsection
